@@ -1,0 +1,26 @@
+.sidebar {
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 250px;
+    display: flex;
+    position: fixed;
+    flex-direction: column;
+    background-color: transparent;
+    margin-top: 40px;
+    margin-bottom: -40px;
+
+    .header {
+        font-size: 1em;
+        font-weight: 700;
+        margin: 0 0 .5em;
+        padding-left: 1.14286em;
+        padding-right: 1.14286em;
+        text-transform: uppercase;
+    }
+
+    > .menu {
+        flex: 1 1 0%;
+        padding-top: 30px;
+    }
+}
