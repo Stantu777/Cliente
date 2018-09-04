@@ -31,6 +31,11 @@ export class TempAuth {
                 ecb()
             })
     }
+
+    logout = () => {
+        this.user = null
+        this.token = null
+    }
 }
 
 export const TEMP_AUTH = new TempAuth()
