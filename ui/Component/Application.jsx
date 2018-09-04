@@ -5,6 +5,7 @@ import { Home, Login, Register } from './Default'
 import { Dashboard } from './Dashboard'
 import Connection from '../Service/Connection'
 import { PrivateRoute } from '../Common/PrivateRoute';
+import { RegisterThesis } from './MyThesis';
 
 
 export default class Application extends PureComponent {
@@ -21,6 +22,7 @@ export default class Application extends PureComponent {
                     <Route exact path='/register' component={Register} />
 
                     <PrivateRoute exact path='/dashboard' component={Dashboard} />
+                    <PrivateRoute exact path='/thesis/register' component={RegisterThesis} />
                 </React.Fragment>
             </Router>
         )

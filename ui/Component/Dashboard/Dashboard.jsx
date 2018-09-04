@@ -9,6 +9,7 @@ export default class Dashboard extends PureComponent {
         return (
             <Main menuItems={SIDEBAR_LINKS}>
                 <Container>
+                    <br /><br />
                     <Header size='large'>Dashboard</Header>
                     Bienvenido {`${TEMP_AUTH.user.firstName} ${TEMP_AUTH.user.lastName}`}
                 </Container>
