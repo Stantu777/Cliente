@@ -1,30 +1,48 @@
-import React, { PureComponent } from 'react';
-import { Menu, Divider } from 'semantic-ui-react';
+import 'lodash'
+import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
+import { Menu, Divider, Header } from 'semantic-ui-react'
 
 export default class Sidebar extends PureComponent {
-    state = { activeItem: 'Actualizar perfil' };
-    
-    handleItemClick = (_, { name }) => this.setState({ activeItem: name });
-
     render() {
-        const { activeItem } = this.state;
+        const { menuItems } = this.props
 
         return (
             <div className='sidebar'>
                 <Menu secondary pointing fluid vertical>
-                    <div className='header'>CONFIGURACIÓN</div>
+                    {menuItems.length ? (
+                        menuItems.map((menuItem, index) => {
+                            const itemType = _.has(menuItem, 'to') << 1 | _.isEmpty(menuItem)
 
-                    <Menu.Item name='Actualizar perfil' active={activeItem === 'Actualizar perfil'} onClick={this.handleItemClick} />
-                    <Menu.Item name='Cambiar avatar' active={activeItem === 'Cambiar avatar'} onClick={this.handleItemClick} />
-                    <Menu.Item name='Cambiar contraseña' active={activeItem === 'Cambiar contraseña'} onClick={this.handleItemClick} />
-                    <Menu.Item name='Cambiar correo electrónico' active={activeItem === 'Cambiar correo electrónico'} onClick={this.handleItemClick} />
+                            switch (itemType) {
+                                case 2:
+                                    // Item is a link
+                                    return <Menu.Item name={menuItem.name} as={Link} to={menuItem.to} key={index} />
+                                case 1:
+                                    // Item is a divider
+                                    return <Divider key={index} />
+                                case 0:
+                                    // Item is a header
+                                    return <div className='header' key={index}>{_.toUpper(menuItem.name)}</div>
+                            }
 
-                    <Divider />
-
-                    <Menu.Item name='Mi perfil' active={activeItem === 'Mi perfil'} onClick={this.handleItemClick} />
-                    <Menu.Item name='Notificaciones' active={activeItem === 'Notificaciones'} onClick={this.handleItemClick} />
+                            return <Menu.Item name={menuItem.name} key={index} />
+                        })
+                    ) : (
+                        <Header size='small'>No se encontraron enlaces</Header>
+                    )}
                 </Menu>
             </div>
-        );
+        )
     }
 }
+/*
+<div className='header'>CONFIGURACIÓN</div>
+<Menu.Item name='Actualizar perfil' active={activeItem === 'Actualizar perfil'} onClick={this.handleItemClick} />
+<Menu.Item name='Cambiar avatar' active={activeItem === 'Cambiar avatar'} onClick={this.handleItemClick} />
+<Menu.Item name='Cambiar contraseña' active={activeItem === 'Cambiar contraseña'} onClick={this.handleItemClick} />
+<Menu.Item name='Cambiar correo electrónico' active={activeItem === 'Cambiar correo electrónico'} onClick={this.handleItemClick} />
+<Divider />
+<Menu.Item name='Mi perfil' active={activeItem === 'Mi perfil'} onClick={this.handleItemClick} />
+<Menu.Item name='Notificaciones' active={activeItem === 'Notificaciones'} onClick={this.handleItemClick} />
+*/
