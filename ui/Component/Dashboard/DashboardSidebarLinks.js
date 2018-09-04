@@ -3,14 +3,6 @@ export const SIDEBAR_LINKS = [
         name: 'Servicio'
     },
     {
-        name: 'Conectarse',
-        to: 'login'
-    },
-    {
-        name: 'Crear usuario',
-        to: 'register'
-    },
-    {
         name: 'Registrar tesis',
         to: 'thesis/register'
     },
