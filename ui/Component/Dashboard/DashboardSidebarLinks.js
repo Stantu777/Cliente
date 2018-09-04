@@ -4,7 +4,7 @@ export const SIDEBAR_LINKS = [
     },
     {
         name: 'Registrar tesis',
-        to: 'thesis/register'
+        to: '/thesis/register'
     },
     {},
     {
@@ -12,14 +12,14 @@ export const SIDEBAR_LINKS = [
     },
     {
         name: 'Guía de inscripción',
-        to: 'guide/submit-proposal'
+        to: '/guide/submit-proposal'
     },
     {
         name: 'Guía de usuario',
-        to: 'guide/user-guide'
+        to: '/guide/user-guide'
     },
     {
         name: 'Guía para sustentación',
-        to: 'guide/defense-presentation'
+        to: '/guide/defense-presentation'
     }
 ]

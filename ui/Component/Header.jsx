@@ -20,7 +20,14 @@ class Header extends Component {
                         <Menu.Item name='Inicio' as={Link} to='/dashboard' />
 
                         <Menu.Menu position='right'>
-                            <Menu.Item name='Registrar tesis' as={Link} to='/thesis/register' />
+                            <Menu.Item name='Propuestas de tesis' as={Link} to='/thesis/proposals' />
+
+                            <Dropdown item text='Mi tesis'>
+                                <Dropdown.Menu>
+                                    <Dropdown.Item as={Link} to='/thesis/register'>Registrar propuesta</Dropdown.Item>
+                                    <Dropdown.Item as={Link} to='/thesis/track'>Estado de propuesta</Dropdown.Item>
+                                </Dropdown.Menu>
+                            </Dropdown>
 
                             <Dropdown item text={`${TEMP_AUTH.user.firstName} ${TEMP_AUTH.user.lastName}`}>
                                 <Dropdown.Menu>

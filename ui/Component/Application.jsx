@@ -4,8 +4,8 @@ import Header from './Header'
 import { Home, Login, Register } from './Default'
 import { Dashboard } from './Dashboard'
 import Connection from '../Service/Connection'
-import { PrivateRoute } from '../Common/PrivateRoute';
-import { RegisterThesis } from './MyThesis';
+import { PrivateRoute } from '../Common/PrivateRoute'
+import { RegisterThesis, TrackThesisProposal, ThesisProposals } from './MyThesis'
 
 
 export default class Application extends PureComponent {
@@ -23,6 +23,8 @@ export default class Application extends PureComponent {
 
                     <PrivateRoute exact path='/dashboard' component={Dashboard} />
                     <PrivateRoute exact path='/thesis/register' component={RegisterThesis} />
+                    <PrivateRoute exact path='/thesis/track' component={TrackThesisProposal} />
+                    <PrivateRoute exact path='/thesis/proposals' component={ThesisProposals} />
                 </React.Fragment>
             </Router>
         )
