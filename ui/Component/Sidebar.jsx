@@ -1,5 +1,5 @@
 import 'lodash'
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import { Link } from 'react-router-dom'
 import { Menu, Divider, Header } from 'semantic-ui-react'
 

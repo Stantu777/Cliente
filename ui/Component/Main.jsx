@@ -18,6 +18,7 @@ export default class Main extends PureComponent {
             <React.Fragment>
                 <Sidebar menuItems={menuItems} />
                 <div className="main">
+                <br /><br />
                     {children}
                 </div>
             </React.Fragment>

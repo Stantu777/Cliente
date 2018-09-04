@@ -11,11 +11,11 @@ export default class Header extends PureComponent {
         const { activeItem } = this.state;
 
         return (
-            <Menu inverted attached>
+            <Menu inverted fixed='top'>
                 <Menu.Item name='inicio' as={Link} to='/' />
                 <Menu.Menu position='right'>
-                    <Menu.Item name='inscribirse' as={Link} to='/register' />
-                    <Menu.Item name='conectarse' as={Link} to='/login' />
+                    <Menu.Item name='Registrate' as={Link} to='/register' />
+                    <Menu.Item name='Conectate' as={Link} to='/login' />
                 </Menu.Menu>
             </Menu>
         );
