@@ -43,14 +43,14 @@ export default class ThesisProposals extends PureComponent {
                             </Table.Row>
                         </Table.Header>
                         <Table.Body>
-                            {_.map(new Array(20), () => {
-                                return <TestRow />
+                            {_.map(new Array(20), (_, i) => {
+                                return <TestRow key={`thesis-entry-${i.toString()}`} />
                             })}
                         </Table.Body>
 
                         <Table.Footer>
                             <Table.Row>
-                                <Table.HeaderCell colSpan={4}>
+                                <Table.Cell colSpan={5}>
                                     <Menu floated='right' pagination>
                                         <Menu.Item as='a' icon>
                                             <Icon name='chevron left' />
@@ -64,7 +64,7 @@ export default class ThesisProposals extends PureComponent {
                                             <Icon name='chevron right' />
                                         </Menu.Item>
                                     </Menu>
-                                </Table.HeaderCell>
+                                </Table.Cell>
                             </Table.Row>
                         </Table.Footer>
                     </Table>
