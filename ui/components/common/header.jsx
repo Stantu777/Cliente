@@ -36,7 +36,8 @@ const PrivateMenu = ({ me }) => (
 )
 
 export default class Header extends Component {
-    listenerId = null
+    loginListenerId = null
+    logoutListenerId = null
 
     state = {
         connected: false,
@@ -44,11 +45,13 @@ export default class Header extends Component {
     }
 
     componentDidMount() {
-        this.listenerId = genesis.addOnReady(this.afterLogin)
+        this.loginListenerId = genesis.addOnReady(this.afterLogin)
+        this.logoutListenerId = genesis.addOnDisconnect(this.afterLogout)
     }
 
     componentWillUnmount() {
-        genesis.removeOnReady(this.listenerId)
+        genesis.removeOnReady(this.loginListenerId)
+        genesis.removeOnDisconnect(this.logoutListenerId)
     }
 
     afterLogin = (me, error) => {
@@ -59,6 +62,13 @@ export default class Header extends Component {
         this.setState({
             me: me,
             connected: true
+        })
+    }
+
+    afterLogout = () => {
+        this.setState({
+            me: null,
+            connected: false
         })
     }
 
