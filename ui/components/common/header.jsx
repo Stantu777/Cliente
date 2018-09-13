@@ -36,10 +36,38 @@ const PrivateMenu = ({ me }) => (
 )
 
 export default class Header extends Component {
+    listenerId = null
+
+    state = {
+        connected: false,
+        me: null
+    }
+
+    componentDidMount() {
+        this.listenerId = genesis.addOnReady(this.afterLogin)
+    }
+
+    componentWillUnmount() {
+        genesis.removeOnReady(this.listenerId)
+    }
+
+    afterLogin = (me, error) => {
+        if (error !== null) {
+            return
+        }
+
+        this.setState({
+            me: me,
+            connected: true
+        })
+    }
+
     render() {
+        const { me, connected } = this.state
+
         return (
             <Menu inverted fixed='top'>
-                {!genesis.ready ? <GuestMenu /> : <PrivateMenu me={genesis.me} />}
+                {!connected ? <GuestMenu /> : <PrivateMenu me={me} />}
             </Menu>
         );
     }

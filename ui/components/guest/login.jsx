@@ -17,14 +17,15 @@ const LOGIN_STATE = {
 }
 
 export default class Login extends Component {
+    listenedId = null
     state = cloneDeep(LOGIN_STATE)
 
     componentDidMount() {
-        genesis.onConnected = this.afterSubmit
+        this.listenedId = genesis.addOnReady(this.afterSubmit)
     }
 
     componentWillUnmount() {
-        genesis.onConnected = null
+        genesis.removeOnReady(this.listenedId)
     }
 
     afterSubmit = (_, error) => {
