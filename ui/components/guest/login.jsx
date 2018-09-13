@@ -108,18 +108,18 @@ export default class Login extends Component {
                 <Form onSubmit={this.handleSubmit}>
                     <Message error visible={errored === true} header={`Intento de conexión fallido`} content='Por favor, inténtelo más tarde.' />
                     <Form.Field required>
-                        <Form.Input iconPosition='left' placeholder='Correo electrónico' error={emailHasError}>
+                        <Form.Input disabled={isSubmitting} iconPosition='left' placeholder='Correo electrónico' error={emailHasError}>
                             <Icon name='at' />
-                            <input name='email' value={emailValue} onChange={this.handleChange} />
+                            <input name='email' value={emailValue} onKeyUp={this.handleChange} onChange={this.handleChange} />
                         </Form.Input>
                     </Form.Field>
                     <Form.Field required>
-                        <Form.Input iconPosition='left' type='password' placeholder='Contraseña' error={passwordHasError}>
+                        <Form.Input disabled={isSubmitting} iconPosition='left' type='password' placeholder='Contraseña' error={passwordHasError}>
                             <Icon name='key' />
-                            <input name='password' value={passwordValue} onChange={this.handleChange} />
+                            <input name='password' value={passwordValue} onKeyUp={this.handleChange} onChange={this.handleChange} />
                         </Form.Input>
                     </Form.Field>
-                    <Button primary disabled={!canSubmit} loading={isSubmitting} type='submit'>Ingresar</Button> <Button as={Link} to='/'>Cancelar</Button>
+                    <Button primary disabled={!canSubmit} loading={isSubmitting} type='submit'>Ingresar</Button> <Button disabled={isSubmitting} as={Link} to='/'>Cancelar</Button>
                 </Form>
             </React.Fragment>
         )

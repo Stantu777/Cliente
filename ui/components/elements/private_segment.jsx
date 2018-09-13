@@ -37,7 +37,6 @@ export default class PrivateSegment extends Component {
     render() {
         const { children } = this.props
         const { connected, me } = this.state
-        console.log(this.state)
 
         if (!connected) {
             return null
