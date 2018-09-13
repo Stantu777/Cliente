@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import { Link, Redirect } from 'react-router-dom'
 import { Header, Form, Icon, Button, Message } from 'semantic-ui-react'
 import genesis from '../../client'
-import { validate } from '../../helpers'
+import { hasError } from '../../helpers'
 
 const LOGIN_STATE = {
     emailValue: '',
@@ -66,7 +66,7 @@ export default class Login extends Component {
 
         this.setState({
             [`${name}Value`]: value,
-            [`${name}HasError`]: validate(name, value)
+            [`${name}HasError`]: hasError(name, value)
         })
 
         this.updateCanSubmit()
