@@ -1,10 +1,6 @@
-/**
- * Implement library
- */
 import Client from '../../lib'
 
-export default class Connection {
-    constructor() {
-        this._client = new Client()
-    }
-}
+let genesis = new Client
+genesis.start()
+
+export { genesis as default }

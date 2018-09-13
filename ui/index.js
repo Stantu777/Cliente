@@ -1,6 +1,6 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import Application from './Component/Application';
+import React from 'react'
+import ReactDOM from 'react-dom'
+import Application from './components'
 
 ReactDOM.render(
     <Application />,

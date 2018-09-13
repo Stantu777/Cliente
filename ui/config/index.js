@@ -1,0 +1,1 @@
+export { APP_CONFIG as default } from './app_config'

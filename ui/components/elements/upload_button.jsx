@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Button, Icon, Label } from 'semantic-ui-react'
+import { Button, Label } from 'semantic-ui-react'
 
 export default class UploadButton extends Component {
     fileInput = null
