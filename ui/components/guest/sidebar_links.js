@@ -59,7 +59,7 @@ const DEFAULT_SIDEBAR = {
 }
 
 
-if (genesis.ready) {
+if (!genesis.ready) {
     DEFAULT_SIDEBAR.links = concat(guestMenu, {}, manuals)
 } else {
     DEFAULT_SIDEBAR.links = concat(userMenu, {}, manuals)

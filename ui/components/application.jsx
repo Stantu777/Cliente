@@ -4,7 +4,8 @@ import { PrivateRoute, GuestOnlyRoute } from '../helpers'
 import { Header, Sidebar } from './common'
 import { DEFAULT_SIDEBAR, Home, Login } from './guest'
 import { Container } from 'semantic-ui-react'
-/*import { Home, Login, Logout, Register } from './Default'
+import { Logout } from './private'
+/*import { Register } from './Default'
 import { Dashboard } from './Dashboard'
 import { RegisterThesis, TrackThesisProposal, ThesisProposals } from './MyThesis'*/
 const sidebarMenu = [ DEFAULT_SIDEBAR ]
@@ -20,6 +21,7 @@ export default class Application extends Component {
                         <Container>
                             <Route exact path='/' component={Home} />
                             <GuestOnlyRoute exact path='/login' component={Login} />
+                            <PrivateRoute exact path='/logout' component={Logout} />
                         </Container>
                     </div>
                 </React.Fragment>
