@@ -1,5 +1,5 @@
 import concat from 'lodash/concat'
-import genesis from '../../service'
+import genesis from '../../client'
 
 const manuals = [
     { label: 'Manuales' },

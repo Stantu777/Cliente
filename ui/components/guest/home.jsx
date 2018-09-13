@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Route } from 'react-router-dom'
 import { Header } from 'semantic-ui-react'
-import genesis from '../../service'
+import genesis from '../../client'
 
 const PrivateSegment = ({ me }) => (
     <Route path='/' exact children={() => (

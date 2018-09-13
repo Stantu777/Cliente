@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Menu, Dropdown } from 'semantic-ui-react'
-import genesis from '../../service'
+import genesis from '../../client'
 import { MenuItem, DropdownItem } from '../elements'
 
 const GuestMenu = () => (

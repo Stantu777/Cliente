@@ -1,7 +1,7 @@
 import React from 'react'
 import { Route, Redirect } from 'react-router-dom'
 import APP_CONFIG from '../config'
-import genesis from '../service'
+import genesis from '../client'
 
 export const PrivateRoute = ({ component: Component, ...rest }) => (
     <Route {...rest} render={props => genesis.ready ? (

@@ -2,7 +2,7 @@ import cloneDeep from 'lodash/cloneDeep'
 import React, { Component } from 'react'
 import { Link, Redirect } from 'react-router-dom'
 import { Header, Form, Icon, Button, Message } from 'semantic-ui-react'
-import genesis from '../../service'
+import genesis from '../../client'
 import { validate } from '../../helpers'
 
 const LOGIN_STATE = {
