@@ -1,7 +1,7 @@
 import cloneDeep from 'lodash/cloneDeep'
 import React, { Component } from 'react'
 import { Link, Redirect } from 'react-router-dom'
-import { Header, Form, Icon, Button, Message } from 'semantic-ui-react'
+import { Container, Header, Form, Icon, Button, Message } from 'semantic-ui-react'
 import genesis from '../../client'
 import { hasError } from '../../helpers'
 
@@ -108,18 +108,26 @@ export default class Login extends Component {
                 <Form onSubmit={this.handleSubmit}>
                     <Message error visible={errored === true} header={`Intento de conexión fallido`} content='Por favor, inténtelo más tarde.' />
                     <Form.Field required>
+                        <label>Correo electrónico</label>
                         <Form.Input disabled={isSubmitting} iconPosition='left' placeholder='Correo electrónico' error={emailHasError}>
                             <Icon name='at' />
-                            <input name='email' value={emailValue} onKeyUp={this.handleChange} onChange={this.handleChange} />
+                            <input name='email' value={emailValue} onChange={this.handleChange} />
                         </Form.Input>
                     </Form.Field>
                     <Form.Field required>
+                        <label>Contraseña</label>
                         <Form.Input disabled={isSubmitting} iconPosition='left' type='password' placeholder='Contraseña' error={passwordHasError}>
                             <Icon name='key' />
-                            <input name='password' value={passwordValue} onKeyUp={this.handleChange} onChange={this.handleChange} />
+                            <input name='password' value={passwordValue} onChange={this.handleChange} />
                         </Form.Input>
                     </Form.Field>
-                    <Button primary disabled={!canSubmit} loading={isSubmitting} type='submit'>Ingresar</Button> <Button disabled={isSubmitting} as={Link} to='/'>Cancelar</Button>
+                    <Container fluid textAlign='center'>
+                        <Button.Group>
+                            <Button disabled={isSubmitting} as={Link} to='/'>Cancelar</Button>
+                            <Button.Or text='o' />
+                            <Button positive disabled={!canSubmit} loading={isSubmitting} type='submit'>Ingresar</Button>
+                        </Button.Group>
+                    </Container>
                 </Form>
             </React.Fragment>
         )

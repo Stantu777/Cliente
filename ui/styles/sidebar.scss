@@ -8,7 +8,8 @@
     flex-direction: column;
     background-color: transparent;
     margin-top: 40px;
-    margin-bottom: -40px;
+    overflow-x: hidden;
+    overflow-y: auto;
 
     .header {
         font-size: 1em;
@@ -22,5 +23,6 @@
     > .menu {
         flex: 1 1 0%;
         padding-top: 30px;
+        padding-bottom: 30px;
     }
 }

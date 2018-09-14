@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Menu, Dropdown } from 'semantic-ui-react'
+import { Dropdown, Icon, Menu } from 'semantic-ui-react'
 import genesis from '../../client'
 import { MenuItem, DropdownItem } from '../elements'
 
@@ -16,18 +16,14 @@ const GuestMenu = () => (
 const PrivateMenu = ({ me }) => (
     <React.Fragment>
         <MenuItem label='Inicio' to='/' activeWhenExact />
-        <MenuItem label='Propuestas' to='/thesis/proposals' activeWhenExact />
         <Menu.Menu position='right'>
-            <Dropdown item text='Mi tesis'>
-                <Dropdown.Menu>
-                    <DropdownItem label='Inscribir propuesta' to='/thesis/register' activeWhenExact />
-                    <DropdownItem label='Estado de propuesta' to='/thesis/track' activeWhenExact />
-                </Dropdown.Menu>
-            </Dropdown>
+            <MenuItem to='/notifications' activeWhenExact>
+                <Icon name='bell' fitted />
+            </MenuItem>
             <Dropdown item text={`${me.person.firstName} ${me.person.lastName}`}>
                 <Dropdown.Menu>
                     <DropdownItem label='Mi perfil' to='/@me' activeWhenExact />
-                    <DropdownItem label='Configuración' to='/account/settings' activeWhenExact />
+                    <DropdownItem label='Configuración' to='/settings' activeWhenExact />
                     <DropdownItem label='Salir' to='/logout' activeWhenExact={false} />
                 </Dropdown.Menu>
             </Dropdown>
@@ -40,8 +36,8 @@ export default class Header extends Component {
     logoutListenerId = null
 
     state = {
-        connected: false,
-        me: null
+        connected: genesis.ready,
+        me: genesis.me
     }
 
     componentDidMount() {
