@@ -2,28 +2,28 @@ export const GUEST_SIDEBAR = [
     { label: 'Enlaces rápidos' },
     {
         label: 'Crear usuario',
-        path: 'register'
+        path: '/register'
     },
     {
         label: 'Ingresar al sistema',
-        path: 'login'
+        path: '/login'
     },
     {},
     { label: 'Manuales' },
     {
         label: 'Manual de inscripción',
-        path: 'manual/registration'
+        path: '/manual/registration'
     },
     {
         label: 'Manual de seguimiento de tesis',
-        path: 'manual/proposal-tracking'
+        path: '/manual/proposal-tracking'
     },
     {
         label: 'Manual de desarrollo de tesis',
-        path: 'manual/thesis-development'
+        path: '/manual/thesis-development'
     },
     {
         label: 'Manual de sustentación de tesis',
-        path: 'manual/thesis-defense'
+        path: '/manual/thesis-defense'
     }
 ]

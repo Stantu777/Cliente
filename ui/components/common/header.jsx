@@ -1,10 +1,20 @@
 import React, { Component } from 'react'
-import { Dropdown, Icon, Menu } from 'semantic-ui-react'
+import { Link } from 'react-router-dom'
+import { Dropdown, Icon, Image, Menu } from 'semantic-ui-react'
 import genesis from '../../client'
 import { MenuItem, DropdownItem } from '../elements'
 
+const Logo = () => (
+    <React.Fragment>
+        <Menu.Item className='logo'>
+            <Image src={require('../../images/logo.png')} />
+        </Menu.Item>
+        <Menu.Item header>Control de tesis</Menu.Item>
+    </React.Fragment>
+)
 const GuestMenu = () => (
     <React.Fragment>
+        <Logo />
         <MenuItem label='Inicio' to='/' activeWhenExact />
         <Menu.Menu position='right'>
             <MenuItem label='Registrate' to='/register' activeWhenExact />
@@ -15,6 +25,7 @@ const GuestMenu = () => (
 
 const PrivateMenu = ({ me }) => (
     <React.Fragment>
+        <Logo />
         <MenuItem label='Inicio' to='/' activeWhenExact />
         <Menu.Menu position='right'>
             <MenuItem to='/notifications' activeWhenExact>
@@ -72,7 +83,7 @@ export default class Header extends Component {
         const { me, connected } = this.state
 
         return (
-            <Menu inverted fixed='top'>
+            <Menu inverted borderless fixed='top'>
                 {!connected ? <GuestMenu /> : <PrivateMenu me={me} />}
             </Menu>
         );
