@@ -1,7 +1,8 @@
+import map from 'lodash/map'
 import findIndex from 'lodash/findIndex'
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import { Container, Header, Form, Divider, Button, Icon } from 'semantic-ui-react'
+import { Container, Dropdown, Header, Form, Divider, Button, Icon } from 'semantic-ui-react'
 import { ID_TYPES, SEXES } from '../../data'
 import { School } from '../../../lib'
 
@@ -11,17 +12,29 @@ export default class Register extends Component {
         idType: '',
         id: '',
         sex: '',
+        schoolId: '',
 
         // Control
+        schools: [],
+        fetchedSchools: false,
         idLabel: '...',
         hasSelectedIdType: false
     }
 
     componentDidMount() {
         School.all().then(schools => {
-            console.log(schools)
-        }).catch(e => {
-            console.log(e)
+            this.setState({
+                schools: map(schools, ({ id, name }, index) => ({
+                    key: index,
+                    value: id,
+                    text: name
+                })),
+                fetchedSchools: true
+            })
+        }).catch(() => {
+            this.setState({
+                fetchedSchools: false
+            })
         })
     }
 
@@ -58,7 +71,7 @@ export default class Register extends Component {
         const { id, idType, sex } = this.state
 
         // Control
-        const { idLabel, hasSelectedIdType } = this.state
+        const { schools, fetchedSchools, idLabel, hasSelectedIdType } = this.state
 
         return (
             <React.Fragment>
@@ -106,6 +119,10 @@ export default class Register extends Component {
                     </Form.Field>
 
                     <Divider section />
+                    <Form.Field required>
+                        <label>Escuela</label>
+                        <Dropdown name='schoolId' placeholder='Escuela' fluid search selection options={schools} loading={!fetchedSchools} onChange={this.handleSelectChange} />
+                    </Form.Field>
 
                     <Form.Field required>
                         <label>Correo electrónico</label>
