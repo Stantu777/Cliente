@@ -49,6 +49,12 @@ export default class Login extends Component {
     }
 
     handleSubmit = () => {
+        const { isSubmitting } = this.state
+
+        if (isSubmitting) {
+            return
+        }
+        
         this.setState({
             isSubmitting: true
         })

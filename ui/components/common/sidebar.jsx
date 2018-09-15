@@ -15,7 +15,7 @@ export default class Sidebar extends Component {
     logoutListenerId = null
 
     state = {
-        connected: false,
+        connected: genesis.ready,
         routes: [ GUEST_SIDEBAR, PRIVATE_SIDEBAR ]
     }
 
@@ -29,7 +29,11 @@ export default class Sidebar extends Component {
         genesis.removeOnDisconnect(this.logoutListenerId)
     }
 
-    afterLogin = () => {
+    afterLogin = (_, error) => {
+        if (error !== null) {
+            return
+        }
+
         this.setState({
             connected: true
         })

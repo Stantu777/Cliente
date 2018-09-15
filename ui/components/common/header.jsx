@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
 import { Dropdown, Icon, Image, Menu } from 'semantic-ui-react'
 import genesis from '../../client'
 import { MenuItem, DropdownItem } from '../elements'

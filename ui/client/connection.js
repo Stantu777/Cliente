@@ -1,6 +1,6 @@
-import Client from '../../lib'
+import clientInstance from '../../lib'
 
-let genesis = new Client
+const genesis = clientInstance()
 genesis.start()
 
 export { genesis as default }

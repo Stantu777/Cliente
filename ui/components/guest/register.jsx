@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { Container, Header, Form, Divider, Button, Icon } from 'semantic-ui-react'
 import { ID_TYPES, SEXES } from '../../data'
+import { School } from '../../../lib'
 
 export default class Register extends Component {
     state = {
@@ -14,6 +15,14 @@ export default class Register extends Component {
         // Control
         idLabel: '...',
         hasSelectedIdType: false
+    }
+
+    componentDidMount() {
+        School.all().then(schools => {
+            console.log(schools)
+        }).catch(e => {
+            console.log(e)
+        })
     }
 
     handleChange = ({ name, value }) => {
