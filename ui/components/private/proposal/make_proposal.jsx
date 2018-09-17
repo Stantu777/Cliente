@@ -1,13 +1,58 @@
+import map from 'lodash/map'
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import { Container, Divider, Form, Button, Header, Icon, Message } from 'semantic-ui-react'
+import { Container, Divider, Dropdown, Form, Button, Header, Icon, Message } from 'semantic-ui-react'
+import genesis from '../../../client'
 import { UploadButton } from '../../elements'
 
 export default class MakeProposal extends Component {
+    listenedId = null
+    
     state = {
+        me: genesis.me,
+
+        thesisTitle: '',
+        lineOfInvestigationId: '',
+        thesisDescription: '',
+
         // Data
         solo: true,
-        partnerId: ''
+        partnerId: '',
+        lines: []
+    }
+
+    componentDidMount() {
+        const { me } = this.state
+
+        this.listenedId = genesis.addOnReady(this.loadLines)
+
+        if (me !== null) {
+            this.loadLines(me, null);
+        }
+    }
+
+    componentWillUnmount() {
+        genesis.removeOnReady(this.listenedId)
+    }
+
+    loadLines = (me, error) => {
+        if (error !== null) {
+            return
+        }
+
+        const { school } = me.person
+
+        school.getLinesOfInvestigation().then(lines => {
+            this.setState({
+                lines: map(lines, (line, index) => ({
+                    key: `line-of-investigation-${index}`,
+                    value: line.id,
+                    text: line.description
+                }))
+            })
+        }).catch(error => {
+            console.log(error)
+        })
     }
 
     handleSubmit = () => {
@@ -19,14 +64,26 @@ export default class MakeProposal extends Component {
         console.log(name, value)
     }
 
-    handleCheckboxChange = (_, { name, checked}) => {
+    handleCheckboxChange = (_, { name, checked }) => {
         this.setState({
             [name]: checked
         })
     }
 
+    handleSelectChange = (_, { name, value }) => {
+        this.setState({
+            [name]: value
+        })
+    }
+
     render() {
-        const { solo } = this.state
+        const {
+            solo,
+            lines,
+            thesisTitle,
+            thesisDescription,
+            lineOfInvestigationId,
+        } = this.state
 
         return (
             <React.Fragment>
@@ -69,18 +126,18 @@ export default class MakeProposal extends Component {
                         <label>Título de tesis</label>
                         <Form.Input iconPosition='left' placeholder='Título de tesis'>
                             <Icon name='info' />
-                            <input name='thesisTitle' />
+                            <input name='topic' value={thesisTitle} />
                         </Form.Input>
                     </Form.Field>
 
                     <Form.Field required>
                         <label>Línea de investigación</label>
-                        <Form.Select fluid options={[]} name='inquiryId' placeholder='Línea de investigación' />
+                        <Dropdown name='lineOfInvestigationId' value={lineOfInvestigationId} placeholder='Línea de investigación' fluid search selection options={lines} loading={!lines.length} onChange={this.handleSelectChange} />
                     </Form.Field>
 
                     <Form.Field required>
                         <label>Descripción de tesis</label>
-                        <Form.TextArea rows={4} placeholder='Describe tu tesis' />
+                        <Form.TextArea name='description' value={thesisDescription} rows={4} placeholder='Describe tu tesis' />
                     </Form.Field>
 
                     <Form.Field required>
