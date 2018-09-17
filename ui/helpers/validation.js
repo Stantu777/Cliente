@@ -9,6 +9,7 @@ import { default as isEqual }  from 'validator/lib/equals'
 const MAX_ID_TYPE = 3
 const MAX_AGE = 150
 const MAX_SEX = 3
+const MAX_INTEGER = 2 ** 31 - 1
 
 const validator = {
     id: function(value, type = null) {
@@ -54,19 +55,28 @@ const validator = {
         return !isEmail(value) && isNumeric(value)
     },
     email: function(value) {
-        return !isEmpty(value) && isLength(value, {min: 12, max: 64}) && isEmail(value)
+        return !isEmpty(value) && isLength(value, { min: 12, max: 64 }) && isEmail(value)
     },
     address: function (value) {
-        return !isEmpty(value) && isLength(value, {min: 12, max: 255 })
+        return !isEmpty(value) && isLength(value, { min: 12, max: 255 })
     },
     phone: function (value) {
-        return !isEmpty(value) && isLength(value, {min: 9, max: 32 })
+        return !isEmpty(value) && isLength(value, { min: 9, max: 32 })
     },
     password: function(value) {
-        return !isEmpty(value) && isLength(value, {min: 6, max: 24})
+        return !isEmpty(value) && isLength(value, { min: 6, max: 24 })
     },
     repeatpassword: function(value, passwordValue) {
-        return !isEmpty(value) && isLength(value, {min: 6, max: 24}) && isEqual(value, passwordValue)
+        return !isEmpty(value) && isLength(value, { min: 6, max: 24 }) && isEqual(value, passwordValue)
+    },
+    topic: function(value) {
+        return !isEmpty(value) && isLength(value, { min: 16, max: 255 })
+    },
+    description: function(value) {
+        return !isEmpty(value) && isLength(value, { min: 16, max: 1024 })
+    },
+    lineOfInvestigationId: function(value) {
+        return !isEmpty(value) && isLength(value, { min: 1, max: 10 }) && isNumeric(value) && +value <= MAX_INTEGER
     }
 }
 
