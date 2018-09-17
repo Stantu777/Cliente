@@ -1,15 +1,18 @@
 import map from 'lodash/map'
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import { Container, Divider, Dropdown, Form, Button, Header, Icon, Message } from 'semantic-ui-react'
+import { Button, Container, Dimmer, Divider, Dropdown, Form, Header, Icon, Loader, Message } from 'semantic-ui-react'
 import genesis from '../../../client'
 import { UploadButton } from '../../elements'
+import { Thesis } from '../../../../lib'
 
 export default class MakeProposal extends Component {
     listenedId = null
     
     state = {
         me: genesis.me,
+        myThesis: null,
+        checked: false,
 
         thesisTitle: '',
         lineOfInvestigationId: '',
@@ -26,9 +29,22 @@ export default class MakeProposal extends Component {
 
         this.listenedId = genesis.addOnReady(this.loadLines)
 
-        if (me !== null) {
-            this.loadLines(me, null);
-        }
+        Thesis.mine().then(thesis => {
+            this.setState({
+                myThesis: thesis,
+                checked: true
+            })
+
+            if (thesis.id === null && me !== null) {
+                this.loadLines(me, null);
+            }
+        }).catch(error => {
+            console.log(error)
+
+            this.setState({
+                checked: true
+            })
+        })
     }
 
     componentWillUnmount() {
@@ -83,12 +99,19 @@ export default class MakeProposal extends Component {
             thesisTitle,
             thesisDescription,
             lineOfInvestigationId,
+            checked,
+            myThesis
         } = this.state
 
-        return (
+        return !checked ? (
+            <Dimmer active inverted>
+                <Loader inverted>Cargando</Loader>
+            </Dimmer>
+        ) : (myThesis.id !== null ? (
+            <Message warning icon='exclamation triangle' header='Ya has registrado una propuesta' content='Revisa el seguimiento de tu propuesta de tesis' />
+        ) : (
             <React.Fragment>
                 <Header as='h2'>Inscribir propuesta</Header>
-
                 <Message icon>
                     <Icon name='exclamation' />
                     <Message.Content>
@@ -107,21 +130,16 @@ export default class MakeProposal extends Component {
                         </Message.List>
                     </Message.Content>
                 </Message>
-
                 <Divider hidden />
-
                 <Form onSubmit={this.handleSubmit}>
                     <Form.Field>
                         <Form.Checkbox name='solo' required checked={solo} onChange={this.handleCheckboxChange} label='Desarrollo individual de tesis' />
                     </Form.Field>
-
                     <Form.Field disabled={solo} required={!solo}>
                         <label>Buscar compañero de tesis</label>
                         <Form.Input name='partnerId' type='text' icon='users' iconPosition='left' onChange={this.handleChange} placeholder='Buscar compañero de tesis' />
                     </Form.Field>
-
                     <Divider section />
-
                     <Form.Field required>
                         <label>Título de tesis</label>
                         <Form.Input iconPosition='left' placeholder='Título de tesis'>
@@ -129,22 +147,18 @@ export default class MakeProposal extends Component {
                             <input name='topic' value={thesisTitle} />
                         </Form.Input>
                     </Form.Field>
-
                     <Form.Field required>
                         <label>Línea de investigación</label>
                         <Dropdown name='lineOfInvestigationId' value={lineOfInvestigationId} placeholder='Línea de investigación' fluid search selection options={lines} loading={!lines.length} onChange={this.handleSelectChange} />
                     </Form.Field>
-
                     <Form.Field required>
                         <label>Descripción de tesis</label>
                         <Form.TextArea name='description' value={thesisDescription} rows={4} placeholder='Describe tu tesis' />
                     </Form.Field>
-
                     <Form.Field required>
                         <label>Adjuntar propuesta</label>
                         <UploadButton label='Adjuntar propuesta' uid='register-thesis-upload-file' />
                     </Form.Field>
-
                     <Container fluid textAlign='center'>
                         <Button.Group className='centered'>
                             <Button as={Link} to='/'>Cancelar</Button>
@@ -154,6 +168,6 @@ export default class MakeProposal extends Component {
                     </Container>
                 </Form>
             </React.Fragment>
-        )
+        ))
     }
 }
