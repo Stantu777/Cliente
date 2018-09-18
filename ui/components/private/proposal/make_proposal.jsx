@@ -1,7 +1,7 @@
 import map from 'lodash/map'
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import { Button, Container, Dimmer, Divider, Dropdown, Form, Header, Icon, Loader, Message } from 'semantic-ui-react'
+import { Button, Container, Segment, Divider, Dropdown, Form, Header, Icon, Loader, Message } from 'semantic-ui-react'
 import genesis from '../../../client'
 import { UploadButton } from '../../elements'
 import { Thesis } from '../../../../lib'
@@ -173,9 +173,9 @@ export default class MakeProposal extends Component {
         } = this.state
 
         return !checked ? (
-            <Dimmer active inverted>
-                <Loader inverted>Cargando</Loader>
-            </Dimmer>
+            <Segment>
+                <Loader active inverted inline='centered'>Cargando...</Loader>
+            </Segment>
         ) : (myThesis.id !== null ? (
             <Message warning icon='exclamation triangle' header='Ya has registrado una propuesta' content='Revisa el seguimiento de tu propuesta de tesis' />
         ) : (
