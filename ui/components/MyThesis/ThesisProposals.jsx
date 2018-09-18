@@ -35,7 +35,7 @@ export default class ThesisProposals extends PureComponent {
                                     Título
                                 </Table.HeaderCell>
                                 <Table.HeaderCell>
-                                    Autor(es)
+                                    Autor
                                 </Table.HeaderCell>
                                 <Table.HeaderCell>
                                     Última actualización
