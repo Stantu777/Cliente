@@ -174,7 +174,7 @@ export default class MakeProposal extends Component {
 
         return !checked ? (
             <Segment>
-                <Loader active inverted inline='centered'>Cargando...</Loader>
+                <Loader active inline='centered'>Cargando...</Loader>
             </Segment>
         ) : (myThesis.id !== null ? (
             <Message warning icon='exclamation triangle' header='Ya has registrado una propuesta' content='Revisa el seguimiento de tu propuesta de tesis' />
