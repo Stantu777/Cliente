@@ -22,8 +22,9 @@ export default class Application extends Component {
                                 <GuestOnlyRoute exact path='/register' component={Register} />
                                 <PrivateRoute exact path='/logout' component={Logout} />
 
-                                <PrivateRoute exact path='/thesis/new' component={MakeProposal} />
-                                <PrivateRoute exact path='/thesis/proposal' component={TrackProposal} />
+                                <PrivateRoute exact path='/theses/new' component={MakeProposal} />
+                                <PrivateRoute exact path='/theses/@mine' component={TrackProposal} />
+                                <PrivateRoute exact path='/theses/:thesisId' component={TrackProposal} />
                                 <PrivateRoute exact path='/management/proposals' component={ListProposals} />
                             </Switch>
                         </Container>

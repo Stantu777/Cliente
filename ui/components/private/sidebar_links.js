@@ -24,11 +24,11 @@ export const PRIVATE_SIDEBAR = [
     { label: 'Mi propuesta' },
     {
         label: 'Seguimiento de estado',
-        path: '/thesis/proposal'
+        path: '/theses/@mine'
     },
     {
         label: 'Inscribir propuesta',
-        path: '/thesis/new'
+        path: '/theses/new'
     },
     {},
     { label: 'Mi Tesis' },
